@@ -1,3 +1,0 @@
-# Wwhds的Python快速入门教程
-
-本教程由copilot和网上练习搭配制作，希望各位能快速入门Python
