@@ -1,12 +1,14 @@
 import json
 
-with open("./地图数据/疫情.txt", "r", encoding="UTF-8") as f:
+with open("../地图数据/疫情.txt", "r", encoding="UTF-8") as f:
     data = json.loads(f.read())
+
+province_name = "北京"
 
 # 获取各省数据
 data = data["areaTree"][0]["children"]
 for i in data:
-    if "河北" == i["name"]:
+    if province_name == i["name"]:
         data = i["children"]
 data_list = []
 
@@ -23,9 +25,9 @@ from pyecharts.charts import Map
 from pyecharts.options import *
 
 virus_map = Map()
-virus_map.add("河北各市确诊人数", data_list, "河北")
+virus_map.add(province_name  + "各市确诊人数", data_list, province_name)
 virus_map.set_global_opts(
-    title_opts=TitleOpts(title="河北疫情地图"),
+    title_opts=TitleOpts(title= province_name + "疫情地图"),
     visualmap_opts=VisualMapOpts(
         is_show=True,
         is_piecewise=True,
@@ -40,4 +42,4 @@ virus_map.set_global_opts(
     )
 )
 
-virus_map.render("河北疫情地图.html")
+virus_map.render(province_name  + "疫情地图.html")
