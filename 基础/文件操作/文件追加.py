@@ -1,5 +1,5 @@
 # 1. 打开文件,通过a模式打开即可
-f = open('file.txt', 'a',encoding="UTF-8")
+f = open('file.txt','a',encoding="UTF-8")
 
 # 2.文件写入
 f.write('hello world')
