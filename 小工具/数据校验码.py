@@ -135,9 +135,45 @@ def generate_hamming_code(k):
                 f.write(f"{i} = {P_result[i][l]}")
             else:
                 f.write(f"\oplus {P_result[i][l]}")
-    f.write("\n$$")
+    f.write("\n$$\n")
+    f.write("# 校验\n")
+    f.write("\n$$\n")
+    for i in P_result:
+        f.write("\\\\")
+        print("S" + i[1:], ":", P_result[i])
+        for l in range(len(P_result[i])):
+            if l == 0:
+                f.write(f"S{i[1:]} = {i} \\oplus {P_result[i][l]}")
+            else:
+                f.write(f"\\oplus {P_result[i][l]}")
+    f.write("\n$$\n")
     f.close()
+def calculate_crc(data, divisor):
+    # 获取移位位数
+    shift_bits = len(divisor) - divisor.find('1') -1
+    # 将数据和除数转换为列表，以便进行操作
+    data = list(map(int, data))
+    data = data + [0] * (len(divisor) - 1)
+    # 保存原始数据，以便最后生成CRC码
+    original_data = data.copy()
+    divisor = list(map(int, divisor))
+
+    # 执行除法操作
+    for i in range(len(data) - len(divisor) + 1):
+        if data[i] == 1:
+            for j in range(len(divisor)):
+                data[i+j] ^= divisor[j]
+    # 生成CRC码
+    crc_code = ''.join(map(str, data[-(len(divisor)-1):]))
+    for i in range(len(crc_code)):
+        j = int(crc_code[i])
+        if j == 1:
+            original_data[len(data) - (len(crc_code) - i)] = 1
+    print(*original_data)
+    print("CRC码:", crc_code)
+    return original_data
 generate_hamming_code(8)
+print(calculate_crc('1100', '1011'))
         
         
     
