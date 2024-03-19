@@ -168,8 +168,7 @@ def calculate_crc(data, divisor):
     print("CRC码:", crc_code)
     return original_data
 
-generate_hamming_code(8)
-print(calculate_crc('1100', '1011'))
+print(*calculate_crc('1100', '1011')) #输出1 1 0 0 0 1 0
         
         
     
