@@ -1,6 +1,7 @@
 # 导入时间模块
 import time
 
+
 # 定义自然合并排序函数
 def natural_merge_sort(arr):
     # 如果数组长度小于等于1，直接返回
@@ -28,7 +29,7 @@ def natural_merge_sort(arr):
         runs, start = [], 0
         # 遍历数组，找出有序部分
         for end in range(1, len(arr)):
-            if arr[end] < arr[end-1]:
+            if arr[end] < arr[end - 1]:
                 runs.append(arr[start:end])
                 start = end
         # 添加最后一个有序部分
@@ -42,6 +43,7 @@ def natural_merge_sort(arr):
         runs.append(merge(runs.pop(0), runs.pop(0)))
     # 返回排序后的数组
     return runs[0]
+
 
 # 导入随机模块
 import random
